@@ -235,9 +235,16 @@ console.log( 'The unique vendors are:', uniqueVendors );
   - Make sure that the resulting array *does not* include any duplicates.
 */
 
+function getCustomers(transactions) {
+  return transactions.customer;
+};
+
+function removeDuplicates(item, index, array) {
+  return array.indexOf(item) === index;
+};
 
 
-var uniqueCustomers;
+var uniqueCustomers = transactions.filter(getCustomers).map(getCustomers).filter(removeDuplicates);
 
 console.log( 'The unique customers are:', uniqueCustomers );
 
