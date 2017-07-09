@@ -243,7 +243,6 @@ function removeDuplicates(item, index, array) {
   return array.indexOf(item) === index;
 };
 
-
 var uniqueCustomers = transactions.filter(getCustomers).map(getCustomers).filter(removeDuplicates);
 
 console.log( 'The unique customers are:', uniqueCustomers );
@@ -262,10 +261,17 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-var bigSpenders;
+function getBigSpenders(transaction) {
+  if (transaction.type === 'sale' && transaction.items.length >= 5) {
+    return {name: transaction.customer, numItems: transaction.items.length};
+  }
+}
+
+var bigSpenders = transactions.filter(getBigSpenders).map(getBigSpenders);
 
 console.log( 'The "big spenders" are:', bigSpenders );
 
+// argument passed into function cannot be same as variable or it comes up empty
 
 // --------------------------------------------------
 // QUESTION 08
@@ -276,9 +282,23 @@ console.log( 'The "big spenders" are:', bigSpenders );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-var sumSales;
 
-console.log( 'The sum of all sales is:', sumSales );
+var getSalesFigures = transactions.filter(sales)
+var itemsFirstSale = getSalesFigures[0]['items'];
+
+
+var sumSales = itemsFirstSale.reduce(function(sum, item) {
+  return sum + item['price'];
+}, 0);
+
+function sales(transactions) {
+  if (transactions.type === 'sale') {
+    return true;
+  }
+}
+
+
+console.log( 'The sum of the first sale is:', sumSales );
 
 
 // --------------------------------------------------
