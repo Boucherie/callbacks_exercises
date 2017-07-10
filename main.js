@@ -362,7 +362,41 @@ console.log( 'The sum of all purchases is:', sumPurchases );
   HINT(S):
   - Unlike 'QUESTION 08' and 'QUESTION 09', here we're interested in both 'sale' and 'purchase' transactions.
 */
-var netProfit;
+var  purchaseTotal = purchaseTotalAll(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
+function purchaseTotalAll(transactions) {
+  var purchases = [];
+  for (var b = 0; b < transactions.length; b++) {
+  if (transactions[b].type === 'purchase') {
+    for (var i = 0; i < transactions[b].items.length; i++) {
+      purchases.push(transactions[b].items[i].price);
+    }
+  }
+}
+  return purchases;
+}
+
+
+var salesTotal = salesTotalAll(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
+function salesTotalAll(transactions) {
+  var sales = [];
+  for (var b = 0; b < transactions.length; b++) {
+  if (transactions[b].type === 'sale') {
+    for (var i = 0; i < transactions[b].items.length; i++) {
+      sales.push(transactions[b].items[i].price);
+    }
+  }
+}
+return sales;
+}
+
+
+var netProfit = purchaseTotal + salesTotal;
 
 console.log( 'The net profit is:', netProfit );
 
