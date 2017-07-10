@@ -312,9 +312,41 @@ console.log( 'The sum of the first sale is:', sumSales );
   - Make sure to include 'price' information from *all* purchases.
 */
 
-var sumPurchases;
+// var sumPurchases = purchaseTotal(transactions).reduce(function(sum, value) {
+//   return sum + value;
+// }, 0);
+//
+// function purchaseTotal(transactions) {
+//   var purchases = [];
+//   for (var b = 0; b < transactions.length; b++) {
+//   if (transactions[b].type === 'purchase') {
+//     for (var i = 0; i < transactions[b].items[i].length; i++) {
+//       purchases.push(transactions[b].items[i].price);
+//     }
+//   }
+// }
+//   return purchases;
+// }
 
-console.log( 'The sum of all purhcases is:', sumPurchases );
+var sumPurchases = purchaseTotal(transactions).reduce(function(sum, value) {
+  return sum + value;
+}, 0);
+
+function purchaseTotal(transactions) {
+  var purchases = [];
+  for (var b = 0; b < transactions.length; b++) {
+  if (transactions[b].type === 'purchase') {
+    for (var i = 0; i < transactions[b].items.length; i++) {
+      purchases.push(transactions[b].items[i].price);
+    }
+  }
+}
+  return purchases;
+}
+
+
+
+console.log( 'The sum of all purchases is:', sumPurchases );
 
 
 // --------------------------------------------------
